@@ -41,20 +41,20 @@ jobs:
         id: current_version
         run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
-      - name: Check if release exists
+      - name: Check if release exists for current version
         id: check_release
         run: |
           VERSION=${{ steps.current_version.outputs.version }}
           if git tag -l "v$VERSION" | grep -q "v$VERSION"; then
             echo "exists=true" >> $GITHUB_OUTPUT
-            echo "Release v$VERSION already exists"
+            echo "Release v$VERSION already exists - will bump version"
           else
             echo "exists=false" >> $GITHUB_OUTPUT
-            echo "Release v$VERSION does not exist"
+            echo "Release v$VERSION does not exist - will use current version"
           fi
 
-      - name: Bump version
-        if: steps.check_release.outputs.exists == 'false'
+      - name: Bump version if release exists
+        if: steps.check_release.outputs.exists == 'true'
         id: bump_version
         run: |
           # Configure git
@@ -73,32 +73,37 @@ jobs:
           git commit -m "chore: bump version to v$NEW_VERSION"
           git push
 
+      - name: Set version for release
+        id: release_version
+        run: |
+          if [ "${{ steps.check_release.outputs.exists }}" = "true" ]; then
+            echo "version=${{ steps.bump_version.outputs.new_version }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=${{ steps.current_version.outputs.version }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Build project
-        if: steps.check_release.outputs.exists == 'false'
         run: pnpm build
 
       - name: Create Git Tag
-        if: steps.check_release.outputs.exists == 'false'
         run: |
-          git tag v${{ steps.bump_version.outputs.new_version }}
-          git push origin v${{ steps.bump_version.outputs.new_version }}
+          git tag v${{ steps.release_version.outputs.version }}
+          git push origin v${{ steps.release_version.outputs.version }}
 
       - name: Create GitHub Release
-        if: steps.check_release.outputs.exists == 'false'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.bump_version.outputs.new_version }}
-          name: Release v${{ steps.bump_version.outputs.new_version }}
+          tag_name: v${{ steps.release_version.outputs.version }}
+          name: Release v${{ steps.release_version.outputs.version }}
           body: |
             ## Changes
-            - Automated release v${{ steps.bump_version.outputs.new_version }}
+            - Automated release v${{ steps.release_version.outputs.version }}
 
-            See the [commit history](https://github.com/${{ github.repository }}/commits/v${{ steps.bump_version.outputs.new_version }}) for detailed changes.
+            See the [commit history](https://github.com/${{ github.repository }}/commits/v${{ steps.release_version.outputs.version }}) for detailed changes.
           draft: false
           prerelease: false
 
       - name: Verify dist folder exists
-        if: steps.check_release.outputs.exists == 'false'
         run: |
           if [ ! -d "dist" ]; then
             echo "❌ dist folder not found after build"
@@ -113,14 +118,8 @@ jobs:
           echo "✅ dist folder and package.json verified"
 
       - name: Publish to NPM
-        if: steps.check_release.outputs.exists == 'false'
         run: |
           cd dist
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Skip publishing
-        if: steps.check_release.outputs.exists == 'true'
-        run: |
-          echo "Skipping publish - release v${{ steps.current_version.outputs.version }} already exists"
