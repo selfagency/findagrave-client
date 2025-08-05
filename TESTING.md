@@ -4,7 +4,7 @@
 
 The FindAGrave client library includes comprehensive unit tests covering all major functionality:
 
-### Core Client Methods
+### Core Client Methods (src/index.test.ts)
 
 - ✅ `searchCemeteries()` - Cemetery search with GraphQL
 - ✅ `searchLocations()` - Location search with GraphQL
@@ -19,8 +19,6 @@ The FindAGrave client library includes comprehensive unit tests covering all maj
 ### Helper Functions
 
 - ✅ `searchCemeteries()` - Simplified cemetery search
-- ✅ `searchLocations()` - Simplified location search
-- ✅ `searchMemorialsGeneral()` - General memorial search helper
 - ✅ `getCemeteriesNear()` - Geographic proximity search
 
 ### Error Handling
@@ -29,7 +27,6 @@ The FindAGrave client library includes comprehensive unit tests covering all maj
 - ✅ REST API HTTP errors
 - ✅ Network failures
 - ✅ Malformed responses
-- ✅ Invalid parameters
 
 ### API Integration
 
@@ -43,7 +40,15 @@ The FindAGrave client library includes comprehensive unit tests covering all maj
 
 - ✅ Client instantiation
 - ✅ Base URL configuration
-- ✅ Request timeouts and retry logic
+
+### Integration Tests (src/examples.test.ts)
+
+- ✅ End-to-end example execution
+- ✅ Error handling in examples
+
+### Test Summary
+
+Total: 23 tests across 2 test files
 
 ## Running Tests
 
@@ -63,19 +68,20 @@ npm run test:watch
 
 ## Test Files
 
-- `findagrave-client.test.ts` - Main unit tests for all client methods
-- `examples.test.ts` - Integration tests for example usage
-- `jest.config.js` - Jest configuration
-- `jest.setup.js` - Global test setup and mocks
+- `src/index.test.ts` - Main unit tests for all client methods (21 tests)
+- `src/examples.test.ts` - Integration tests for example usage (2 tests)
+- `jest.config.cjs` - Jest configuration for ES modules
+- `jest.setup.cjs` - Global test setup and mocks
+- `__mocks__/@urql/core.ts` - Manual mock for GraphQL client
 
 ## Mock Strategy
 
 Tests use comprehensive mocking:
 
-- **@urql/core**: Mocked GraphQL client with controllable responses
-- **fetch**: Global fetch mock for REST API testing
-- **Console**: Suppressed console output during tests
-- **Modules**: Strategic module mocking for isolated testing
+- **@urql/core**: Manual mock in `__mocks__/@urql/core.ts` with controllable GraphQL responses
+- **fetch**: Global fetch mock for REST API testing using Jest's built-in mocking
+- **Console**: Suppressed console output during tests for cleaner test runs
+- **Modules**: Strategic module mocking for isolated testing of individual components
 
 ## Coverage Goals
 

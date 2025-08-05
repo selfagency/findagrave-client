@@ -14,7 +14,7 @@ module.exports = {
     }],
   },
   collectCoverageFrom: [
-    'findagrave-client.ts',
+    'src/index.ts',
     '!**/*.d.ts',
   ],
   coverageDirectory: 'coverage',

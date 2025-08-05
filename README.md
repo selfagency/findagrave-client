@@ -1,6 +1,13 @@
 # FindAGrave TypeScript Client
 
-A comprehensive TypeScript client for the FindAGrave API that combines GraphQL queries (using @urql/core) and REST endpoints (using node's fetch) to search for cemeteries, locations, and memorials.
+A comprehensive TypeScript client for the FindAGrave API that combines GraphQL queries (using @urql/core) and REST endpoints (using no// Find cemeteries near coordinates
+const nearby = await getCemeteriesNear(40.7128, -74.006, 0.1);
+
+// Search for memorials in a specific cemetery
+const cemeterMemorials = await searchMemorials('99920', 'John', 'Smith', 'Cedar Park Cemetery');
+
+// Search for memorials across all cemeteries
+const memorials = await searchMemorialsGeneral('John', 'Smith', 'New York');fetch) to search for cemeteries, locations, and memorials.
 
 ## Development
 
@@ -33,18 +40,16 @@ The test suite includes:
 ### Building
 
 ```bash
-# Build TypeScript to JavaScript
+# Build TypeScript to JavaScript (CommonJS and ESM)
 npm run build
 
-# Build in watch mode for development
-npm run dev
+# The build process uses tsup for fast builds with multiple formats
 ```
 
 ## Installation
 
 ```bash
-npm install @urql/core
-npm install --save-dev @types/node typescript
+npm install findagrave-client @urql/core graphql
 ```
 
 ## Features
@@ -60,7 +65,7 @@ npm install --save-dev @types/node typescript
 ## Quick Start
 
 ```typescript
-import { createFindAGraveClient, searchCemeteries, searchLocations, searchMemorialsGeneral } from './findagrave-client';
+import { createFindAGraveClient, searchCemeteries, searchLocations, searchMemorialsGeneral } from 'findagrave-client';
 
 // Quick search for cemeteries
 const cemeteries = await searchCemeteries('Cedar Park');
@@ -155,12 +160,13 @@ const generalHtml = await client.searchMemorialsGeneral({
 import {
   searchCemeteries,
   searchLocations,
+  searchMemorials,
   searchMemorialsGeneral,
   getCemeteriesNear,
   browseFromTop,
   browseContinent,
   browseCountry,
-} from './findagrave-client';
+} from 'findagrave-client';
 
 // Quick cemetery search
 const cemeteries = await searchCemeteries('Riverside');
@@ -298,7 +304,7 @@ The client automatically includes the required headers for FindAGrave's API:
 
 ## Examples
 
-See `examples.ts` for comprehensive usage examples including:
+See `src/examples.ts` for comprehensive usage examples including:
 
 1. Cemetery search by name
 2. Location search
