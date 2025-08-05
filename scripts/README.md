@@ -13,6 +13,12 @@ Generates a simplified `package.json` file for the `dist/` folder after building
    - ESM/CommonJS dual format support via exports field
    - No dev dependencies
    - Essential metadata (name, version, description, author, license)
+3. **Generates dist README.md** with:
+   - Package overview and installation instructions
+   - Quick start examples
+   - Complete API method documentation
+   - Feature highlights
+   - Link to full GitHub documentation
 
 ### Usage
 
@@ -29,14 +35,14 @@ npm run build:package
 ```json
 {
   "name": "findagrave-client",
-  "version": "0.1.0", 
+  "version": "0.1.0",
   "main": "index.cjs",
   "module": "index.js",
   "types": "index.d.ts",
   "exports": {
     ".": {
       "import": "./index.js",
-      "require": "./index.cjs", 
+      "require": "./index.cjs",
       "types": "./index.d.ts"
     }
   },
@@ -47,4 +53,4 @@ npm run build:package
 }
 ```
 
-This ensures users installing the package get proper dependency resolution and module format support for both CommonJS and ESM environments.
+This ensures users installing the package get proper dependency resolution and module format support for both CommonJS and ESM environments, plus comprehensive documentation right in the package.
