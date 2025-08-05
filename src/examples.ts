@@ -1,4 +1,4 @@
-import { createFindAGraveClient, searchCemeteries, searchLocations, getCemeteriesNear } from './findagrave-client';
+import { createFindAGraveClient, searchCemeteries, searchLocations, getCemeteriesNear } from '.';
 
 async function examples() {
   console.log('FindAGrave Client Examples\n');

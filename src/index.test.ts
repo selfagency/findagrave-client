@@ -16,7 +16,7 @@ global.fetch = jest.fn();
 const mockFetch = fetch as jest.MockedFunction<typeof fetch>;
 
 // Import after mocking
-import { FindAGraveClient, createFindAGraveClient, searchCemeteries, getCemeteriesNear } from './findagrave-client';
+import { FindAGraveClient, createFindAGraveClient, searchCemeteries, getCemeteriesNear } from './index';
 
 describe('FindAGraveClient', () => {
   let client: FindAGraveClient;

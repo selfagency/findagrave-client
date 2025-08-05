@@ -2,12 +2,11 @@
   "name": "findagrave-client",
   "version": "0.1.0",
   "description": "TypeScript client for FindAGrave GraphQL and REST APIs",
-  "main": "dist/findagrave-client.js",
-  "types": "dist/findagrave-client.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
+    "build": "tsup src/index.ts --format cjs,esm --dts --out-dir dist --clean",
     "test": "jest --config jest.config.cjs",
     "test:watch": "jest --config jest.config.cjs --watch",
     "test:coverage": "jest --config jest.config.cjs --coverage"
@@ -33,6 +32,7 @@
     "jiti": "^2.5.1",
     "prettier": "^3.6.2",
     "ts-jest": "^29.4.1",
+    "tsup": "^8.5.0",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.39.0"
   },

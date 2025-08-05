@@ -1,7 +1,7 @@
 import { examples } from './examples';
 
-// Mock the entire findagrave-client module
-jest.mock('./findagrave-client', () => ({
+// Mock the entire index module
+jest.mock('./index', () => ({
   createFindAGraveClient: jest.fn(() => ({
     searchCemeteries: jest.fn().mockResolvedValue({
       total: 2,
@@ -190,7 +190,7 @@ describe('Examples Integration Tests', () => {
     jest.clearAllMocks();
 
     // Re-import with the error mock
-    jest.doMock('./findagrave-client', () => ({
+    jest.doMock('./index', () => ({
       createFindAGraveClient: jest.fn(() => ({
         searchCemeteries: jest.fn().mockRejectedValue(mockError),
         searchLocations: jest.fn(),

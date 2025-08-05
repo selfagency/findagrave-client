@@ -19,6 +19,5 @@
     "**/dist/**": true,
     "**/coverage/**": true
   },
-  "typescript.validate.enable": true,
-  "typescript.preferences.includePackageJsonAutoImports": "off"
+  "typescript.validate.enable": true
 }
