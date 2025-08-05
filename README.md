@@ -36,8 +36,15 @@ The test suite includes:
 # Build TypeScript to JavaScript (CommonJS and ESM)
 npm run build
 
-# The build process uses tsup for fast builds with multiple formats
+# Generate just the dist package.json
+npm run build:package
 ```
+
+The build process:
+
+1. Uses `tsup` for fast builds with multiple output formats (CommonJS + ESM)
+2. Automatically generates a simplified `package.json` in the `dist/` folder
+3. Includes proper module exports and dependency declarations for end users
 
 ## Installation
 
