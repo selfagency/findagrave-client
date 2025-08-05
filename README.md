@@ -1,13 +1,6 @@
 # FindAGrave TypeScript Client
 
-A comprehensive TypeScript client for the FindAGrave API that combines GraphQL queries (using @urql/core) and REST endpoints (using no// Find cemeteries near coordinates
-const nearby = await getCemeteriesNear(40.7128, -74.006, 0.1);
-
-// Search for memorials in a specific cemetery
-const cemeterMemorials = await searchMemorials('99920', 'John', 'Smith', 'Cedar Park Cemetery');
-
-// Search for memorials across all cemeteries
-const memorials = await searchMemorialsGeneral('John', 'Smith', 'New York');fetch) to search for cemeteries, locations, and memorials.
+A comprehensive TypeScript client for the FindAGrave API that combines GraphQL queries and REST endpoints to search for cemeteries, locations, and memorials.
 
 ## Development
 
