@@ -1,0 +1,2 @@
+# This file was renamed to jest.config.cjs
+# The old jest.config.js is incompatible with ES modules

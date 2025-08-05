@@ -1,0 +1,48 @@
+{
+  "name": "findagrave-client",
+  "version": "0.1.0",
+  "description": "TypeScript client for FindAGrave GraphQL and REST APIs",
+  "main": "dist/findagrave-client.js",
+  "types": "dist/findagrave-client.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest --config jest.config.cjs",
+    "test:watch": "jest --config jest.config.cjs --watch",
+    "test:coverage": "jest --config jest.config.cjs --coverage"
+  },
+  "dependencies": {
+    "@urql/core": "5.2.0",
+    "graphql": "^16.11.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.32.0",
+    "@eslint/json": "^0.13.1",
+    "@eslint/markdown": "^7.1.0",
+    "@types/jest": "30.0.0",
+    "@types/node": "24.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-perfectionist": "^4.15.0",
+    "eslint-plugin-prettier": "^5.5.3",
+    "globals": "^16.3.0",
+    "jest": "30.0.5",
+    "jiti": "^2.5.1",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.1",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.39.0"
+  },
+  "keywords": [
+    "findagrave",
+    "genealogy",
+    "cemetery",
+    "graphql",
+    "typescript"
+  ],
+  "author": "Daniel Sieradski <daniel@self.agency>",
+  "license": "MIT"
+}

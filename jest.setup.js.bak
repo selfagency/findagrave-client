@@ -1,0 +1,2 @@
+# This file was renamed to jest.setup.cjs
+# The old jest.setup.js is incompatible with ES modules
