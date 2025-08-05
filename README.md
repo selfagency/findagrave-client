@@ -49,7 +49,7 @@ The build process:
 ## Installation
 
 ```bash
-npm install findagrave-client @urql/core graphql
+npm install findagrave-client
 ```
 
 ## Features

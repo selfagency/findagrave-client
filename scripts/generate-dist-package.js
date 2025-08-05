@@ -35,9 +35,9 @@ const distPackageJson = {
   type: 'module',
   exports: {
     '.': {
+      types: './index.d.ts',     // TypeScript types
       import: './index.js',     // ESM import
-      require: './index.cjs',   // CommonJS require
-      types: './index.d.ts'     // TypeScript types
+      require: './index.cjs'   // CommonJS require
     }
   },
   dependencies: {
